@@ -1,12 +1,12 @@
-# Cake-Recipe-Card
+#  Cake-Recipe-Card
 An interactive, responsive web project showcasing men's products with clean design, animations, and user‑friendly UI.
-# 🍫 Chocolate Cake Recipe Card
+# Chocolate Cake Recipe Card
 
-## 📌 Overview
+##  Overview
 The **Chocolate Cake Recipe Card** is an interactive, responsive, and visually engaging single-page project that showcases a delicious chocolate cake recipe.  
 It combines **HTML5**, **CSS3 animations & transitions**, and **JavaScript** interactivity to create a modern, user-friendly experience.
 
-## ✨ Features
+##  Features
 - **Recipe Details**: Title, image, preparation time, and serving size.
 - **Toggle Sections**: Show/hide ingredients and step-by-step instructions.
 - **Interactive Cooking Mode**:
@@ -18,7 +18,7 @@ It combines **HTML5**, **CSS3 animations & transitions**, and **JavaScript** int
 - **Responsive Design**: Works on mobile, tablet, and desktop.
 - **Print-Friendly View** using `@media print` CSS.
 
-## 🛠 Tech Stack
+##  Tech Stack
 - **HTML5** – Structured layout of the recipe card.
 - **CSS3** – Styling, colors, animations, responsive design.
 - **JavaScript (ES6)** – Dynamic interactivity, timers, step highlighting.
