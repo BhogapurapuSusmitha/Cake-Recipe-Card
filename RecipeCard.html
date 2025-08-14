@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chocolate Cake Recipe Card</title>
+<style>
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff8f0;
+    color: #333;
+    margin: 20px;
+    padding: 0;
+  }
+  h1,h2,h3 {
+    margin: 0 0 10px;
+  }
+
+  /* Container */
+  .recipe-card {
+    max-width: 600px;
+    margin: auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(180, 120, 80, 0.15);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Recipe Title */
+  .recipe-title {
+    background: #cb641b;
+    color: white;
+    font-weight: 700;
+    font-size: 2rem;
+    text-align: center;
+    padding: 20px;
+    letter-spacing: 1.2px;
+  }
+
+  /* Image */
+  .recipe-image {
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Sections */
+  section {
+    padding: 20px 30px;
+    border-bottom: 1px solid #f0d7b3;
+    background: #fff3e6;
+  }
+
+  /* Last section without border */
+  section:last-of-type {
+    border-bottom: none;
+  }
+
+  /* Headings in sections */
+  section h2 {
+    color: #a14d00;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    border-bottom: 3px solid #a14d00;
+    padding-bottom: 5px;
+  }
+
+  /* Buttons */
+  button {
+    background-color: #a14d00;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #cf702b;
+  }
+
+  /* Ingredients List & Steps */
+  ul, ol {
+    padding-left: 20px;
+    margin: 0;
+  }
+
+  /* Hover effects with smooth transitions */
+  ul li:hover, ol li:hover {
+    color: #cf702b;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+
+  /* Step highlight */
+  .step-highlight {
+    background-color: #cf702b;
+    color: white;
+    border-radius: 4px;
+    padding: 4px 8px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Toggle containers - hidden and visible */
+  .hidden {
+    display: none;
+    opacity: 0;
+    max-height: 0;
+    transition: opacity 0.4s ease, max-height 0.4s ease;
+    overflow: hidden;
+  }
+  .visible {
+    display: block;
+    opacity: 1;
+    max-height: 1000px; /* large for animation */
+    transition: opacity 0.4s ease, max-height 0.4s ease;
+  }
+
+  /* Progress bar container and bar */
+  .progress-container {
+    background-color: #ffe5cc;
+    border-radius: 10px;
+    height: 18px;
+    width: 100%;
+    margin-bottom: 20px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  }
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #a14d00, #cf702b);
+    border-radius: 10px;
+    transition: width 0.4s ease;
+  }
+
+  /* Timer display */
+  .timer {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #a14d00;
+  }
+
+  /* Responsive design */
+  @media (max-width: 640px) {
+    body {
+      margin: 10px;
+    }
+    .recipe-card {
+      margin: 10px auto;
+    }
+    section {
+      padding: 15px 20px;
+    }
+    .recipe-title {
+      font-size: 1.7rem;
+      padding: 15px 10px;
+    }
+    button {
+      width: 100%;
+      padding: 12px 0;
+      font-size: 1.1rem;
+    }
+  }
+
+  /* Print-friendly CSS */
+  @media print {
+    body {
+      background: white;
+      margin: 0;
+    }
+    .recipe-title {
+      color: black;
+      background: white;
+      border-bottom: 1px solid black;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+    button, .progress-container, .timer {
+      display: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="recipe-card">
+
+  <header class="recipe-title">Chocolate Cake</header>
+
+  <img class="recipe-image" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Chocolate Cake" />
+
+  <section>
+    <h2>Details</h2>
+    <p><strong>Preparation time:</strong> 45 minutes</p>
+    <p><strong>Serving size:</strong> 8 servings</p>
+  </section>
+
+  <section>
+    <h2>Ingredients</h2>
+    <button id="toggleIngredientsBtn">Show Ingredients</button>
+    <ul id="ingredientsList" class="hidden">
+      <li>1 and 1/2 cups all-purpose flour</li>
+      <li>1 cup granulated sugar</li>
+      <li>1/4 cup cocoa powder</li>
+      <li>1 teaspoon baking powder</li>
+      <li>1/2 teaspoon baking soda</li>
+      <li>1/2 teaspoon salt</li>
+      <li>2 eggs</li>
+      <li>1/2 cup vegetable oil</li>
+      <li>3/4 cup buttermilk</li>
+      <li>1 teaspoon vanilla extract</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Steps</h2>
+    <button id="toggleStepsBtn">Show Steps</button>
+    <ol id="stepsList" class="hidden">
+      <li>Preheat your oven to 350°F (175°C). Grease and flour a 9-inch round cake pan.</li>
+      <li>In a large bowl, whisk flour, sugar, cocoa, baking powder, baking soda, and salt.</li>
+      <li>In another bowl, beat eggs, oil, buttermilk, and vanilla extract until smooth.</li>
+      <li>Gradually mix wet ingredients into dry ingredients until well combined.</li>
+      <li>Pour batter into prepared pan and bake for 30-35 minutes or until a toothpick comes out clean.</li>
+      <li>Cool cake in the pan for 10 minutes, then remove and cool completely on a wire rack.</li>
+      <li>Frost with your favorite chocolate frosting and serve.</li>
+    </ol>
+
+    <div class="timer" id="timer" style="display:none;">Time Remaining: 45:00</div>
+
+    <div class="progress-container" style="display:none;">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <button id="startCookingBtn">Start Cooking</button>
+    <button id="nextStepBtn" style="display:none;">Next Step</button>
+  </section>
+
+</div>
+
+<script>
+  // Toggle Ingredients visibility
+  const toggleIngredientsBtn = document.getElementById('toggleIngredientsBtn');
+  const ingredientsList = document.getElementById('ingredientsList');
+
+  toggleIngredientsBtn.addEventListener('click', () => {
+    if (ingredientsList.classList.contains('hidden')) {
+      ingredientsList.classList.remove('hidden');
+      ingredientsList.classList.add('visible');
+      toggleIngredientsBtn.textContent = "Hide Ingredients";
+    } else {
+      ingredientsList.classList.remove('visible');
+      ingredientsList.classList.add('hidden');
+      toggleIngredientsBtn.textContent = "Show Ingredients";
+    }
+  });
+
+  // Toggle Steps visibility
+  const toggleStepsBtn = document.getElementById('toggleStepsBtn');
+  const stepsList = document.getElementById('stepsList');
+
+  toggleStepsBtn.addEventListener('click', () => {
+    if (stepsList.classList.contains('hidden')) {
+      stepsList.classList.remove('hidden');
+      stepsList.classList.add('visible');
+      toggleStepsBtn.textContent = "Hide Steps";
+    } else {
+      stepsList.classList.remove('visible');
+      stepsList.classList.add('hidden');
+      toggleStepsBtn.textContent = "Show Steps";
+    }
+  });
+
+  // Cooking Steps Interaction
+  const startCookingBtn = document.getElementById('startCookingBtn');
+  const nextStepBtn = document.getElementById('nextStepBtn');
+  const steps = stepsList.querySelectorAll('li');
+
+  // Timer variables
+  const timerDisplay = document.getElementById('timer');
+  let timerInterval;
+  let totalSeconds = 45 * 60; // 45 minutes in seconds
+  let currentStep = -1;
+
+  const progressBar = document.getElementById('progressBar');
+  let progressContainer = progressBar.parentElement;
+
+  function resetSteps() {
+    steps.forEach(li => li.classList.remove('step-highlight'));
+    currentStep = -1;
+  }
+
+  function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+  }
+
+  function startTimer() {
+    clearInterval(timerInterval);
+    timerDisplay.style.display = 'block';
+    progressContainer.style.display = 'block';
+    let timeLeft = totalSeconds;
+    timerDisplay.textContent = `Time Remaining: ${formatTime(timeLeft)}`;
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      timerDisplay.textContent = `Time Remaining: ${formatTime(timeLeft)}`;
+      const progressPercent = Math.min(100, ((totalSeconds - timeLeft) / totalSeconds) * 100);
+      progressBar.style.width = progressPercent + '%';
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        timerDisplay.textContent = "Time's up!";
+      }
+    }, 1000);
+  }
+
+  startCookingBtn.addEventListener('click', () => {
+    stepsList.classList.remove('hidden');
+    stepsList.classList.add('visible');
+    toggleStepsBtn.textContent = "Hide Steps";
+
+    startCookingBtn.style.display = 'none';
+    nextStepBtn.style.display = 'inline-block';
+
+    resetSteps();
+
+    currentStep = 0;
+    steps[currentStep].classList.add('step-highlight');
+
+    startTimer();
+  });
+
+  nextStepBtn.addEventListener('click', () => {
+    if (currentStep < steps.length - 1) {
+      steps[currentStep].classList.remove('step-highlight');
+      currentStep++;
+      steps[currentStep].classList.add('step-highlight');
+    } else {
+      alert("You have completed all the steps! Enjoy your cake.");
+      nextStepBtn.style.display = 'none';
+      startCookingBtn.style.display = 'inline-block';
+      timerDisplay.style.display = 'none';
+      progressContainer.style.display = 'none';
+      progressBar.style.width = '0%';
+      resetSteps();
+      clearInterval(timerInterval);
+    }
+  });
+</script>
+
+</body>
+</html>
